@@ -5,6 +5,8 @@ import com.example.test.repositories.ProductRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,8 +33,8 @@ public class ProductService {
 
 
     @Cacheable(value = "all product")
-    public List<Product> getAllProduct(){
-        return productRepo.findAll();
+    public Page<Product> getAllProduct(Pageable pageable){
+        return productRepo.findAll(pageable);
     }
 
     public Product updateProduct(Long id, Product updatedProduct) {

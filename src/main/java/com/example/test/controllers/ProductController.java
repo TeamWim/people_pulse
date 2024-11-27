@@ -3,6 +3,8 @@ package com.example.test.controllers;
 import com.example.test.models.Product;
 import com.example.test.services.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,8 @@ public class ProductController {
 
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllProduct());
+    public ResponseEntity<Page<Product>> getAllProducts(Pageable pageable) {
+        return ResponseEntity.ok(productService.getAllProduct(pageable));
     }
 
     @GetMapping("/{id}")
